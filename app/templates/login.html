@@ -1,0 +1,35 @@
+{% extends 'layout.html'%}
+
+{% block title %}
+    {{ super() }} | Login
+{% endblock %}
+
+{% block content %}
+<h3>
+    Login to your account below!
+</h3>
+<div class="row">
+    <div class='col-md-6'>
+        <form action="{{ url_for('authentication.login') }}" method='POST' novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.email(class='form-control', placeholder='Email') }}
+                {%for error in form.email.errors %}
+                <div class="alert alert-danger" role="alert">
+                    <strong>{{error}}</strong>
+                </div>
+                {% endfor %}
+            </div>
+            <div class="form-group">
+                {{ form.password(class='form-control', placeholder='Password') }}
+            </div>
+            {{ form.submit(class='btn btn-outline-primary btn-block') }}
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        <a href="{{url_for('authentication.register') }}">Not registered? Click Here!</a>
+    </div>
+</div>
+{% endblock %}

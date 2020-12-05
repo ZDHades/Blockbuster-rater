@@ -1,0 +1,25 @@
+{% extends 'layout.html'%}
+
+{% block title %}
+    {{ super() }} | {{movie.original_title}}
+{% endblock %}
+
+{% block content %}
+
+
+<div class="card" style="width: 18rem;">
+    <img src="https://image.tmdb.org/t/p/w300_and_h450_bestv2/{{movie.poster_path}}" class="card-img-top" alt="{{movie.original_title}} poster path">
+    <div class="card-body">
+        <h5 class="card-title">{{movie.original_title}}</h5>
+        <p class="card-text">{{movie.overview}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{movie.release_date}}</li>
+    </ul>
+    <div class="card-body">
+        <a href="{{url_for('movies.Rate_up', name=movie.original_title)}}" class="card-link" method='POST'><i class="fa fa-thumbs-up"></i></a>
+        <a href="{{url_for('movies.Rate_down', name=movie.original_title)}}" class="card-link" method='POST'><i class="fa fa-thumbs-down"></i></a>
+    </div>
+</div>
+
+{% endblock %}

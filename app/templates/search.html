@@ -1,0 +1,40 @@
+{% extends 'layout.html'%}
+{% set active_page='search'-%}
+
+{% block title %}
+    {{ super() }} | Search
+{% endblock %}
+
+{% block content %} 
+<br>
+<div class="row">
+    <div class='col-md-6'>
+        <form action="{{ url_for('movies.search') }}" method='POST' novalidate>
+            {{ form.hidden_tag() }}
+            <div class="form-group">
+                {{ form.name(class='form-control', placeholder='Title of a Movie to search for') }}
+            </div>
+            {{ form.submit(class='btn btn-outline-primary btn-block') }}
+        </form>
+    </div>
+</div>
+
+<div class="card-deck">
+    <div class="card" style='width:400px;'>
+        <div class='card-header'>Your Results
+            <ul class="list-group list-group-flush">
+                {% if movies %}
+                    {% for movie in movies %}
+                     <li class="list-group-item"> 
+                        <a href="{{url_for('movies.single_movie', id=movie.id)}}">{{ movie.original_title }}</a>
+                     </li>
+                    {% endfor %}
+                {% else %}
+                    <li class="list-group-item">No results to display</li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
